@@ -1,39 +1,57 @@
 ﻿using System.Diagnostics;
 using lab4;
 
-Console.Write("Number of vertices: ");
-var n = int.Parse(Console.ReadLine());
+var n = 14;
 
 Graph g = new Graph(n);
 
-// Generate Random Graph
-var rnd = new Random();
-var vertices = Enumerable.Range(0, n).ToList();
-vertices = vertices.OrderBy(item => rnd.Next()).ToList();
-
-for (int i = 0; i < vertices.Count-1; i++)
-{
-    g.AddEdge(vertices[i],vertices[i+1]);    
-}
-
-foreach (var i in vertices)
-{
-    var j = rnd.Next(vertices.Count - 1);
-    var k = rnd.Next(vertices.Count - 1);
-    
-    g.AddEdge(vertices[j],vertices[k]);
-}
+g.AddEdge(1, 2);
+g.AddEdge(1, 3);
+g.AddEdge(2, 4);
+g.AddEdge(3, 4);
+g.AddEdge(3, 5);
+g.AddEdge(4, 6);
+g.AddEdge(5, 7);
+g.AddEdge(5, 8);
+g.AddEdge(6, 9);
+g.AddEdge(7, 10);
+g.AddEdge(7, 11);
+g.AddEdge(10, 12);
+g.AddEdge(11, 13);
 
 // Measure Execution Time
 Stopwatch stopwatch = new Stopwatch();
 
 stopwatch.Start();
-g.Bfs(0);
+g.Bfs(1, 2);
 stopwatch.Stop();
-Console.WriteLine("\nBfs elapsed time (ms): {0}", stopwatch.Elapsed.TotalMilliseconds);
 
 stopwatch.Reset();
 stopwatch.Start();
-g.Dfs(0);
+g.Dfs(1, 2);
 stopwatch.Stop();
-Console.WriteLine("\nDfs elapsed time (ms): {0}", stopwatch.Elapsed.TotalMilliseconds);
+
+stopwatch.Start();
+g.Bfs(1, 13);
+stopwatch.Stop();
+
+stopwatch.Reset();
+stopwatch.Start();
+g.Dfs(1, 13);
+stopwatch.Stop();
+
+for (int i = 2; i < 14; i++)
+{
+    Console.WriteLine($"\n------------ {i} -------------");
+    stopwatch.Start();
+    g.Bfs(1, i);
+    stopwatch.Stop();
+    Console.WriteLine("Bfs elapsed time (ms): {0}", stopwatch.Elapsed.TotalMilliseconds);
+
+    stopwatch.Reset();
+    stopwatch.Start();
+    g.Dfs(1, i);
+    stopwatch.Stop();
+    Console.WriteLine("Dfs elapsed time (ms): {0}", stopwatch.Elapsed.TotalMilliseconds);
+} 
+

@@ -24,7 +24,7 @@ public class Graph
         _adj[v].Add(w);
     }
     
-    public void Bfs(int s)
+    public void Bfs(int s, int d)
     {
         // Mark all the vertices as not
         // visited(By default set as false)
@@ -46,7 +46,10 @@ public class Graph
             // Dequeue a vertex from queue
             // and print it
             s = queue.First();
-            // Console.Write(s + " " );
+            if (d == s)
+            {
+                return;
+            }
             queue.RemoveFirst();
          
             // Get all adjacent vertices of the
@@ -66,26 +69,30 @@ public class Graph
         }
     }
     
-    private void DfsUtil(int v, bool[] visited)
+    private void DfsUtil(int v, bool[] visited, int d)
     {
         // Mark the current node as visited
         // and print it
         visited[v] = true;
-        // Console.Write(v + " ");
- 
+
+        if (d == v)
+        {
+            return;
+        }
+
         // Recur for all the vertices
         // adjacent to this vertex
         List<int> vList = _adj[v];
         foreach(var n in vList)
         {
             if (!visited[n])
-                DfsUtil(n, visited);
+                DfsUtil(n, visited, d);
         }
     }
  
     // The function to do DFS traversal.
     // It uses recursive DFSUtil()
-    public void Dfs(int v)
+    public void Dfs(int v, int d)
     {
         // Mark all the vertices as not visited
         // (set as false by default in c#)
@@ -93,6 +100,6 @@ public class Graph
  
         // Call the recursive helper function
         // to print DFS traversal
-        DfsUtil(v, visited);
+        DfsUtil(v, visited, d);
     }
 }
