@@ -34,5 +34,5 @@ func floyd(graph [][]int) {
 		}
 	}
 
-	printGraph(dist)
+	// printGraph(dist)
 }

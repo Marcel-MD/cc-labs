@@ -8,6 +8,7 @@ import (
 
 const INF = math.MaxInt32 - 100
 
+// n -> number of vertices // density -> density of the graph
 func generateRandomGraph(n int, density int) [][]int {
 	graph := make([][]int, n)
 	for i := range graph {

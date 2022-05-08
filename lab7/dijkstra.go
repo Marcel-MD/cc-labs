@@ -43,7 +43,7 @@ func dijkstra(graph [][]int, src int) {
 		}
 	}
 
-	printRow(dist)
+	// printRow(dist)
 }
 
 // A utility function to find the
